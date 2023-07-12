@@ -13,14 +13,16 @@ const NavBar = () => {
     setUser(true);
   };
   function googleInit() {
-    window.google.accounts.id.initialize({
-      client_id: process.env.REACT_APP_CLIENT_ID,
-      // callback: handleCredentialResponse
-    });
-    window.google.accounts.id.renderButton(
-      googleButtonRef.current,
-      { theme: "outline", size: "large" }
-    )
+    if(window.google){
+      window.google.accounts.id.initialize({
+        client_id: process.env.REACT_APP_CLIENT_ID,
+        // callback: handleCredentialResponse
+      });
+      window.google.accounts.id.renderButton(
+        googleButtonRef.current,
+        { theme: "outline", size: "large" }
+      )
+    }
     // window.google.accounts.id.prompt();
   }
   const signOut = () => {
@@ -40,8 +42,7 @@ const NavBar = () => {
           Sign Out
         </button>
       ) : (
-        ""
-        // <div ref={googleButtonRef} /> 
+        <div ref={googleButtonRef} /> 
         // <button className="sign-in">
         //   <img
         //     onClick={googleSignIn}
