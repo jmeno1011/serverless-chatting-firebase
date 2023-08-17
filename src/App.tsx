@@ -1,10 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
 import NavBar from './components/NavBar';
+import styles from "./App.module.css"
 
 function App() {
   return (
-    <div className="App">
+    <div className={styles.container}>
       <header className="App-header">
         <NavBar />
       </header>

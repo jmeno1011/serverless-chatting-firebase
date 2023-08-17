@@ -7,7 +7,7 @@ declare global{
 }
 
 const NavBar = () => {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
   const googleButtonRef = useRef(null);
   const googleSignIn = () => {
     setUser(true);
@@ -16,18 +16,21 @@ const NavBar = () => {
     if(window.google){
       window.google.accounts.id.initialize({
         client_id: process.env.REACT_APP_CLIENT_ID,
-        // callback: handleCredentialResponse
+        callback: googleSignIn
       });
       window.google.accounts.id.renderButton(
         googleButtonRef.current,
         { theme: "outline", size: "large" }
-      )
+      ) as HTMLElement
     }
     // window.google.accounts.id.prompt();
   }
   const signOut = () => {
     setUser(false);
   };
+
+  console.log(user);
+  
 
   useEffect(()=>{
     googleInit();
@@ -36,7 +39,7 @@ const NavBar = () => {
   return (
     <nav className="nav-bar">
       <h1>React Chat</h1>
-      <div ref={googleButtonRef} /> 
+      {/* <div ref={googleButtonRef} />  */}
       {user ? (
         <button onClick={signOut} className="sign-out" type="button">
           Sign Out
