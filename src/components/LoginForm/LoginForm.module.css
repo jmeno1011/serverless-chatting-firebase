@@ -1,0 +1,80 @@
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    margin-top: 30vh;
+    padding: 24px;
+    position: relative;
+    --border-size: 3px;
+    --border-angle: 0turn;
+}
+
+@property --border-angle {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0turn;
+}
+
+@keyframes bg-spin {
+    to {
+        --border-angle: 1turn;
+    }
+}
+
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: conic-gradient(from var(--border-angle),
+            #213,
+            #112 50%,
+            #213),
+        conic-gradient(from var(--border-angle), transparent 20%, #08f, #f03);
+    background-size: calc(100% - (var(--border-size) * 2)) calc(100% - (var(--border-size) * 2)), cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    animation: bg-spin 5s linear infinite;
+}
+
+
+.container h3 {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: flex-start;
+    color: var(--color);
+    position: relative;
+    z-index: 2;
+}
+
+.container>div {
+    padding: 0 16px;
+    position: relative;
+    z-index: 2;
+}
+
+.loginButton {
+    padding: 6px 8px;
+    margin-bottom: 16px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 20px;
+    background-color: var(--secondary-background-color);
+    color: var(--secondary-color);
+    outline: none;
+    border: thin solid var(--color);
+    cursor: pointer;
+}
+
+.loginButton svg {
+    font-size: 1.25rem;
+    margin-right: 8px;
+}

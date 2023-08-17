@@ -1,12 +1,12 @@
-import NavBar from './components/NavBar';
-import styles from "./App.module.css"
+import NavBar from "./components/NavBar";
+import styles from "./App.module.css";
+import LoginForm from "./components/LoginForm/LoginForm";
 
 function App() {
   return (
     <div className={styles.container}>
-      <header className="App-header">
-        <NavBar />
-      </header>
+      {/* <NavBar /> */}
+      <LoginForm />
     </div>
   );
 }

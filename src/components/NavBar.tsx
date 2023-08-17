@@ -9,8 +9,9 @@ declare global{
 const NavBar = () => {
   const [user, setUser] = useState(false);
   const googleButtonRef = useRef(null);
-  const googleSignIn = () => {
+  const googleSignIn = (response:any) => {
     setUser(true);
+    console.log("Encoded JWT ID token: " + response.credential);
   };
   function googleInit() {
     if(window.google){
@@ -26,6 +27,7 @@ const NavBar = () => {
     // window.google.accounts.id.prompt();
   }
   const signOut = () => {
+    window.google.accounts.id.disableAutoSelect();
     setUser(false);
   };
 
@@ -41,7 +43,7 @@ const NavBar = () => {
       <h1>React Chat</h1>
       {/* <div ref={googleButtonRef} />  */}
       {user ? (
-        <button onClick={signOut} className="sign-out" type="button">
+        <button onClick={signOut} className="g_id_signout" type="button">
           Sign Out
         </button>
       ) : (
