@@ -5,6 +5,7 @@ import {
   useEffect,
   useReducer,
 } from "react";
+import jwtDecode from "jwt-decode";
 
 interface State {
   loggedIn: boolean;
@@ -59,10 +60,11 @@ const initialState = {
   loading: true,
 };
 
-const handleCredentialResponse=(response: any)=> {
-  console.log("Encoded JWT ID token: " + response.credential);
-  return response.credential;
-}
+const handleCredentialResponse = (response: any) => {
+  //   console.log("Encoded JWT ID token: " + response.credential);
+  const responsePayload = jwtDecode(response.credential);
+  console.log("ID: ", responsePayload);
+};
 
 function googleInit() {
   if (window.google) {
@@ -70,8 +72,8 @@ function googleInit() {
       client_id: process.env.REACT_APP_CLIENT_ID,
       callback: handleCredentialResponse,
     });
-    const data = response;
-    console.log(data);
+    // const data = response;
+    console.log(response);
   }
 }
 
@@ -83,7 +85,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   useEffect(() => {
-    googleInit();
+    // googleInit();
   }, []);
 
   return (

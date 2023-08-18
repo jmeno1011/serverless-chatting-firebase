@@ -1,0 +1,6 @@
+.container{
+    width: 100%;
+    display: flex;
+    background-color: var(--background-color);
+    color: var(--color);
+}
