@@ -1,4 +1,3 @@
-import styles from "./App.module.css";
 import Login from "./pages/Login/Login";
 import { useAuthState } from "context/auth";
 import { Routes, Route, Router, Navigate } from "react-router-dom";

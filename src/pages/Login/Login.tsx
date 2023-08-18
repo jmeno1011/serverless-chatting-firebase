@@ -2,14 +2,20 @@ import React, { useRef } from "react";
 import styles from "./Login.module.css";
 import { GoogleLogin } from "components";
 import useScript from "hooks/useScript";
+import { useAuthDispatch, useAuthState } from "context/auth";
 
 const GOOGLE_CLIENT_URL = "https://accounts.google.com/gsi/client";
 
 export default function Login() {
+  const {loggedIn} = useAuthState();
   const googleButtonRef = useRef<HTMLDivElement>(null);
+  const dispatch = useAuthDispatch();
 
+  console.log(loggedIn);
+  
   const onGoogleSignIn = async (res: any) => {
     console.log("Encoded JWT ID token: ", res.credential);
+    dispatch("LOGIN", res.credential);
   };
 
   useScript(GOOGLE_CLIENT_URL, () => {
