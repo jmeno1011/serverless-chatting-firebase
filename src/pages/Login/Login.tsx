@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import styles from "./Login.module.css";
-import { GoogleLogin } from "components";
 import useScript from "hooks/useScript";
 import { useAuthDispatch, useAuthState } from "context/auth";
+import { GoogleLogin } from "components/Login";
 
 const GOOGLE_CLIENT_URL = "https://accounts.google.com/gsi/client";
 
