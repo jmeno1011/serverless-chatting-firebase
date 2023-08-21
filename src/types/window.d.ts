@@ -1,5 +1,8 @@
+// TODO:: export {}; 가 왜필요한지 
+export {};
+
 declare global{
-  export interface Window{
+  interface Window{
     google: any;
   }
 }

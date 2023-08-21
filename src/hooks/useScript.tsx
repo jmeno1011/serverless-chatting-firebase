@@ -6,8 +6,9 @@ export default function useScript(url: string, onload: () => void) {
     script.onload = onload;
     document.head.appendChild(script);
     // clean up
-    return () => {
-      document.head.removeChild(script);
-    };
+    // logout시 script가 없어 에러가 발생하여 지우지 않음
+    // return () => {
+    //   document.head.removeChild(script);
+    // };
   }, [url, onload]);
 }
