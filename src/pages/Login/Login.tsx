@@ -1,10 +1,8 @@
 import React, { useRef } from "react";
 import styles from "./Login.module.css";
 import useScript from "hooks/useScript";
-import { useAuthDispatch, useAuthState } from "context/auth";
 import { GoogleLogin } from "components/Login";
-import { useSelector, useDispatch } from 'react-redux'
-import { RootState } from "store";
+import { useDispatch } from 'react-redux'
 import { login } from "features/auth";
 
 const GOOGLE_CLIENT_URL = "https://accounts.google.com/gsi/client";
