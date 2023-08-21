@@ -1,11 +1,12 @@
 import Login from "./pages/Login/Login";
-import { useAuthState } from "context/auth";
-import { Routes, Route, Router, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "layout/Layout";
 import Home from "pages/Home/Home";
+import { useSelector } from "react-redux";
+import { RootState } from "store";
 
 function App() {
-  const { loggedIn } = useAuthState();
+  const { loggedIn } = useSelector((state: RootState) => state.auth);
 
   return (
     <Routes>

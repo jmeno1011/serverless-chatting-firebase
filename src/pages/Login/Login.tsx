@@ -8,16 +8,11 @@ import { login } from "features/auth";
 const GOOGLE_CLIENT_URL = "https://accounts.google.com/gsi/client";
 
 export default function Login() {
-  // const {loggedIn} = useAuthState();
   const googleButtonRef = useRef<HTMLDivElement>(null);
-  // const dispatch = useAuthDispatch();
-  // const auth = useSelector((state:RootState)=>state.auth)
   const dispatch = useDispatch();
-
   
   const onGoogleSignIn = async (res: any) => {
     console.log("Encoded JWT ID token: ", res.credential);
-    // dispatch("LOGIN", res.credential);
     dispatch(login(res.credential));
   };
 
