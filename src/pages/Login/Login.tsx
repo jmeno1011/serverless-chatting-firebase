@@ -1,39 +1,34 @@
-import React, { useRef } from "react";
+import React from "react";
 import styles from "./Login.module.css";
-import useScript from "hooks/useScript";
-import { GoogleLogin } from "components/Login";
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
 import { login } from "features/auth";
-
-const GOOGLE_CLIENT_URL = "https://accounts.google.com/gsi/client";
+import { auth } from "firebaseInit";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { ReactComponent as GoogleIcon } from "assets/google-plus.svg";
 
 export default function Login() {
-  const googleButtonRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
-  
-  const onGoogleSignIn = async (res: any) => {
-    console.log("Encoded JWT ID token: ", res.credential);
-    dispatch(login(res.credential));
+
+  const googleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    // pop-up 형태로 로그인
+    signInWithPopup(auth, provider).then((res) => {
+      // redux - auth 에 추가하기 displayName이나 email 등등의 user 정보
+      const { uid, displayName, email } = res.user;
+      dispatch(login(uid));
+    });
   };
 
-  useScript(GOOGLE_CLIENT_URL, () => {
-    window.google.accounts.id.initialize({
-      client_id: process.env.REACT_APP_CLIENT_ID,
-      callback: onGoogleSignIn,
-    });
-    window.google.accounts.id.renderButton(googleButtonRef.current, {
-      theme: "outline",
-      size: "large",
-      text: "Continue with Google",
-      width: "100%"
-    });
-  });
+  console.log();
 
   return (
     <div className={styles.container}>
       <h3>Sign Up</h3>
       <div>
-        {<GoogleLogin googleButtonRef={googleButtonRef} />}
+        <button className={styles.loginButton} onClick={googleSignIn}>
+          <GoogleIcon />
+          <span>Continue with Google</span>
+        </button>
       </div>
     </div>
   );

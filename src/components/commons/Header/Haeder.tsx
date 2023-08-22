@@ -8,8 +8,8 @@ interface HaederProps {
 export default function Haeder({ onSignOut }: HaederProps) {
   return (
     <header className={styles.container}>
-      <h2 className={styles.name}>Title</h2>
-      <button onClick={onSignOut}>logout</button>
+      <h1 className={styles.name}>React - Chat</h1>
+      <button onClick={onSignOut}>Sign Out</button>
     </header>
   )
 }
