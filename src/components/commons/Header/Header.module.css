@@ -1,12 +1,13 @@
 .container {
   height: 64px;
-  padding: 16px;
+  padding: 0 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: var(--header-background);
 }
 .name{
+  margin: 0;
   font-size: var(--h1-text);
   font-family: 'Roboto', sans-serif;
   line-height: 1.75;
@@ -14,7 +15,7 @@
 }
 
 .container button{
-  padding: 6px 16px;
+  padding: 2px 16px;
   background-color: transparent;
   color: #fff;
   border: 1px solid #fff;

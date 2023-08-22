@@ -5,5 +5,5 @@
     color: var(--color);
 }
 .pages{
-    flex-grow: 1;
+    height: calc(100vh - 64px);
 }

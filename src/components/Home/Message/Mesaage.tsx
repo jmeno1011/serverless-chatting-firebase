@@ -15,8 +15,15 @@ export default function Mesaage({ message }: MessageProps) {
   return (
     <div className={cn("container", message.uid === user && "right")}>
       <div className={styles.message}>
-        <p>{message.name}</p>
-        <p>{message.text}</p>
+        {message.uid === user ? null : <div className={styles.avatar}></div>}
+        <div>
+          {message.uid === user ? null : (
+            <p className={styles.name}>{message.name}</p>
+          )}
+          <p className={cn("text", message.uid === user && "messageRight")}>
+            {message.text}
+          </p>
+        </div>
       </div>
     </div>
   );

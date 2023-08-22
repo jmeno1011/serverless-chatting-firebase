@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from "./ChatRoom.module.css"
-import SendMessage from 'components/SendMessage/SendMessage'
+import SendMessage from 'components/Home/SendMessage/SendMessage'
 
 export default function ChatRoom() {
   return (

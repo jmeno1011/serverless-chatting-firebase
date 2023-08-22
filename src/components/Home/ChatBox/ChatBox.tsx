@@ -8,6 +8,7 @@ import {
 import { db } from "firebaseInit";
 import React, { useEffect, useState, useRef } from "react";
 import Mesaage from "../Message/Mesaage";
+import styles from "./ChatBox.module.css"
 
 export default function ChatBox() {
   const [messages, setMessages] = useState<any[]>([]);
@@ -27,19 +28,17 @@ export default function ChatBox() {
         (a, b) => a.createdAt - b.createdAt
       );
       console.log(sortedMessage);
-      
+
       setMessages(sortedMessage);
     });
 
     return () => unsubscribe();
   }, []);
-  return <div>
-    <div>
-      {
-        messages?.map(message=>(
-          <Mesaage key={message.id} message={message} />
-        ))
-      }
+  return (
+    <div className={styles.container}>
+      {messages?.map((message) => (
+        <Mesaage key={message.id} message={message} />
+      ))}
     </div>
-  </div>;
+  );
 }

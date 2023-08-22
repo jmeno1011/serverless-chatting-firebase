@@ -1,4 +1,29 @@
 .container{
+  height: 100%;
   display: grid;
   grid-template-columns: 300px 1fr;
+}
+
+.chatRoom{
+  height: 100%;
+  position: relative;
+}
+.chatRoom header{
+  height: 65px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid silver;
+}
+.chatRoom h1{
+  margin: 0;
+  font-size: var(--h1-text);
+}
+
+.chatBlock{
+  position: absolute;
+  top: 65px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }

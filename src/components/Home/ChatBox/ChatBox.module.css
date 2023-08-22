@@ -1,0 +1,10 @@
+.container{
+  margin-top: 16px;
+  padding: 0 16px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 70px;
+  overflow-y: auto;
+}

@@ -1,7 +1,12 @@
 .container{
+  height: 38px;
   padding: 16px;
   display: flex;
   background-color: var(--header-background);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .messageInput{
