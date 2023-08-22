@@ -1,0 +1,16 @@
+.container{
+  padding: 16px;
+  display: flex;
+  background-color: var(--header-background);
+}
+
+.messageInput{
+  padding: 6px 12px;
+  font-size: 1rem;
+  width: 100%;
+}
+.messageSendButton{
+  padding: 6px 12px;
+  font-size: 1rem;
+  cursor: pointer;
+}

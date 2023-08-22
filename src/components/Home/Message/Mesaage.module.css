@@ -1,0 +1,15 @@
+.container{
+  width: 100%;
+  display: flex;
+}
+
+.message{
+  padding: 6px 12px;
+  background-color: #fff;
+  color: black;
+  margin-bottom: 16px;
+}
+
+.right{
+  justify-content: flex-end;
+}
