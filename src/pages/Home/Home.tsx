@@ -1,20 +1,84 @@
-import React from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  ChangeEvent,
+  FormEvent,
+} from "react";
+import { ChatBox, ChatList, Header, SendMessage } from "components/Home";
+import { Message } from "types/chat";
+import {
+  addDoc,
+  collection,
+  limit,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+} from "firebase/firestore";
+import { auth, db } from "firebaseInit";
 import styles from "./Home.module.css";
-import { ChatList, ChatRoom } from "components/Home";
-import SendMessage from "components/Home/SendMessage/SendMessage";
-import ChatBox from "components/Home/ChatBox/ChatBox";
 
 export default function Home() {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [message, setMessage] = useState<string>("");
+  const scroll = useRef<HTMLSpanElement>(null);
+
+  const onMessage = (e: ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value);
+  };
+
+  const onSendMessage = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (message.trim() === "") {
+      console.log("Enter valid message");
+      return;
+    }
+    if (auth.currentUser) {
+      const { uid, displayName } = auth.currentUser;
+      await addDoc(collection(db, "message"), {
+        text: message,
+        name: displayName,
+        createdAt: serverTimestamp(),
+        uid,
+      });
+    }
+    setMessage("");
+  };
+
+  useEffect(() => {
+    const q = query(
+      collection(db, "message"),
+      orderBy("createdAt", "desc"),
+      limit(50)
+    );
+    const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
+      const fetchedMessages: any[] = [];
+      QuerySnapshot.forEach((doc) => {
+        fetchedMessages.push({ ...doc.data(), id: doc.id });
+      });
+      const sortedMessage = fetchedMessages.sort(
+        (a, b) => a.createdAt - b.createdAt
+      );
+      setMessages(sortedMessage);
+      scroll.current?.scrollIntoView({ behavior: "smooth" });
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   return (
     <div className={styles.container}>
       <ChatList />
       <div className={styles.chatRoom}>
-        <header>
-          <h1>ChatRoom</h1>
-        </header>
-        <div className={styles.chatBlock}>
-          <ChatBox />
-          <SendMessage />
+        <Header />
+        <div className={styles.chattingBox}>
+          <ChatBox messages={messages} scroll={scroll} />
+          <SendMessage
+            message={message}
+            onMessage={onMessage}
+            onSendMessage={onSendMessage}
+          />
         </div>
       </div>
     </div>

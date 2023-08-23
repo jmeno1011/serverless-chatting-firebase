@@ -1,11 +1,11 @@
 import React, {useEffect} from "react";
 import styles from "./Layout.module.css";
 import { Outlet } from "react-router-dom";
-import Haeder from "components/commons/Header/Haeder";
 import { useDispatch } from "react-redux";
 import { login, logout } from "features/auth";
 import { auth } from "firebaseInit";
 import { User } from "firebase/auth";
+import { Header } from "components/commons";
 
 export default function Layout() {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ export default function Layout() {
 
   return (
     <div className={styles.container}>
-      <Haeder onSignOut={onSignOut} />
+      <Header onSignOut={onSignOut} />
       <div className={styles.pages}>
         <Outlet />
       </div>

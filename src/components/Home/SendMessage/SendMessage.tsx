@@ -1,33 +1,13 @@
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { auth, db } from "firebaseInit";
-import React, { FormEvent, ChangeEvent, useState } from "react";
-import styles from "./SendMessage.module.css"
+import React, { FormEvent, ChangeEvent } from "react";
+import styles from "./SendMessage.module.css";
 
-export default function SendMessage() {
-  const [message, setMessage] = useState<string>("");
+interface SendMessageProps {
+  message: string;
+  onMessage: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSendMessage: (e: FormEvent<HTMLFormElement>) => void;
+}
 
-  const onMessage = (e: ChangeEvent<HTMLInputElement>) => {
-    setMessage(e.target.value);
-  };
-
-  const onSendMessage = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (message.trim() === "") {
-      console.log("Enter valid message");
-      return;
-    }
-    if (auth.currentUser) {
-      const { uid, displayName } = auth.currentUser;
-      await addDoc(collection(db, "message"), {
-        text: message,
-        name: displayName,
-        createdAt: serverTimestamp(),
-        uid,
-      });
-    }
-    setMessage('');
-  };
-
+export default function SendMessage({message, onMessage,  onSendMessage}: SendMessageProps) {
   return (
     <form onSubmit={onSendMessage} className={styles.container}>
       <label htmlFor="messageInput" hidden>
@@ -42,7 +22,9 @@ export default function SendMessage() {
         onChange={onMessage}
         className={styles.messageInput}
       />
-      <button type="submit" className={styles.messageSendButton}>Send</button>
+      <button type="submit" className={styles.messageSendButton}>
+        Send
+      </button>
     </form>
   );
 }

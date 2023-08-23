@@ -1,0 +1,12 @@
+.container {
+  height: 65px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid silver;
+}
+
+.container h1 {
+  margin: 0;
+  font-size: var(--h1-text);
+}
