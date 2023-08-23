@@ -61,6 +61,7 @@ export default function Home() {
         (a, b) => a.createdAt - b.createdAt
       );
       setMessages(sortedMessage);
+      // TODO: scroll 내려가게 하기 
       scroll.current?.scrollIntoView({ behavior: "smooth" });
     });
 

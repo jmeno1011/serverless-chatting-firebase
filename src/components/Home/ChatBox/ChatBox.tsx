@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import Mesaage from "../Message/Mesaage";
 import { Message } from "types/chat";
 import styles from "./ChatBox.module.css";
