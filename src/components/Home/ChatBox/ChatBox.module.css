@@ -8,3 +8,11 @@
   bottom: 70px;
   overflow-y: auto;
 }
+
+.container::-webkit-scrollbar {
+  width: 8px;
+}
+.container::-webkit-scrollbar-thumb {
+  background-color: aquamarine;
+  border-radius: 16px;
+}

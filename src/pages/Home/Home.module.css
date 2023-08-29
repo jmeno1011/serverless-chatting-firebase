@@ -1,15 +1,26 @@
-.container{
+.container {
   height: 100%;
   display: grid;
   grid-template-columns: 300px 1fr;
 }
 
-.chatRoom{
+.emptyRoom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.emptyRoom>h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.chatRoom {
   height: 100%;
   position: relative;
 }
 
-.chattingBox{
+.chattingBox {
   position: absolute;
   top: 65px;
   left: 0;

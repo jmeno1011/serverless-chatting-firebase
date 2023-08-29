@@ -5,23 +5,24 @@ import React, {
   ChangeEvent,
   FormEvent,
 } from "react";
-import { ChatBox, ChatList, Header, SendMessage } from "components/Home";
+import { useParams } from "react-router-dom";
+import styles from "./ChatRoom.module.css";
+import { ChatBox, Header, SendMessage } from "components/Home";
 import { Message } from "types/chat";
+import { auth, db } from "firebaseInit";
 import {
   addDoc,
   collection,
+  doc,
   limit,
   onSnapshot,
   orderBy,
   query,
   serverTimestamp,
 } from "firebase/firestore";
-import { auth, db } from "firebaseInit";
-import styles from "./Home.module.css";
-import { Outlet, useLocation } from "react-router-dom";
 
-export default function Home() {
-  const { pathname } = useLocation();
+export default function ChatRoom() {
+  const { room } = useParams();
   const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState<string>("");
   const scroll = useRef<HTMLDivElement>(null);
@@ -38,7 +39,7 @@ export default function Home() {
     }
     if (auth.currentUser) {
       const { uid, displayName } = auth.currentUser;
-      await addDoc(collection(db, "message"), {
+      await addDoc(collection(db, `chat/${room}`), {
         text: message,
         name: displayName,
         createdAt: serverTimestamp(),
@@ -51,7 +52,8 @@ export default function Home() {
 
   useEffect(() => {
     const q = query(
-      collection(db, "message"),
+      // doc(db, "chat", room),
+      collection(db, `message`),
       orderBy("createdAt", "desc"),
       limit(50)
     );
@@ -74,18 +76,10 @@ export default function Home() {
 
     return () => unsubscribe();
   }, [messages]);
-
   return (
-    <div className={styles.container}>
-      {pathname === "/" ? (
-        <div className={styles.emptyRoom}>
-          <h1>방을 선택해주세요~</h1>
-        </div>
-      ) : (
-        <Outlet />
-      )}
-      {/* <div className={styles.chatRoom}>
-        <Header />
+    <div>
+      <div className={styles.chatRoom}>
+        <Header room={room} />
         <div className={styles.chattingBox}>
           <ChatBox messages={messages} scroll={scroll} />
           <SendMessage
@@ -94,7 +88,7 @@ export default function Home() {
             onSendMessage={onSendMessage}
           />
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

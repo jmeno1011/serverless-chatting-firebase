@@ -1,0 +1,12 @@
+.chatRoom {
+  height: 100%;
+  position: relative;
+}
+
+.chattingBox {
+  position: absolute;
+  top: 65px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
