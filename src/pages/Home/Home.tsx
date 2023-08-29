@@ -22,7 +22,7 @@ import styles from "./Home.module.css";
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState<string>("");
-  const scroll = useRef<HTMLSpanElement>(null);
+  const scroll = useRef<HTMLDivElement>(null);
 
   const onMessage = (e: ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
@@ -44,8 +44,9 @@ export default function Home() {
       });
     }
     setMessage("");
+    scroll.current?.scrollIntoView({ behavior: "smooth"});
   };
-
+  
   useEffect(() => {
     const q = query(
       collection(db, "message"),
@@ -62,7 +63,10 @@ export default function Home() {
       );
       setMessages(sortedMessage);
       // TODO: scroll 내려가게 하기 
-      scroll.current?.scrollIntoView({ behavior: "smooth" });
+      if(scroll.current){
+        scroll.current.scrollIntoView({ behavior: "smooth"});
+        scroll.current.scrollTop = scroll.current.scrollHeight;
+      }
     });
 
     return () => unsubscribe();

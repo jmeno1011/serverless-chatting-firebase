@@ -19,7 +19,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 // TODO: evnet-log system 구축해보기 아래 주소에서 확인 및 검색해서 구성
 // https://firebase.google.com/docs/analytics/get-started?platform=web&hl=ko
 // const analytics = getAnalytics(app);
