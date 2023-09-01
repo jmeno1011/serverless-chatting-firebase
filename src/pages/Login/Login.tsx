@@ -19,8 +19,6 @@ export default function Login() {
     });
   };
 
-  console.log();
-
   return (
     <div className={styles.container}>
       <h3>Sign Up</h3>

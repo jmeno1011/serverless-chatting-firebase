@@ -13,7 +13,6 @@ import { auth, db } from "firebaseInit";
 import {
   addDoc,
   collection,
-  doc,
   limit,
   onSnapshot,
   orderBy,
@@ -52,7 +51,6 @@ export default function ChatRoom() {
 
   useEffect(() => {
     const q = query(
-      // doc(db, "chat", room),
       collection(db, `message`),
       orderBy("createdAt", "desc"),
       limit(50)
